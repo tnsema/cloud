@@ -1,9 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-black/10 dark:border-white/10">
-      <div className="mx-auto flex min-h-16 w-full max-w-6xl items-center justify-between gap-4 px-6 py-4 text-sm text-foreground/70">
-        <span>Cloud Journey</span>
-        <span>Cloud Engineer to Cloud Security Engineer</span>
+    <footer className="bg-black px-6 py-8 text-white md:px-8 lg:px-12">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 text-center sm:flex-row sm:text-left">
+        <p className="font-orbitron text-lg">Thobile</p>
+        <p className="text-gray-400">
+          Cloud Engineer to Cloud Security Engineer
+        </p>
       </div>
     </footer>
   );

@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
+/* =========================
+   CSS VARIABLES (THEME)
+   ========================= */
+
 :root {
+  /* Core colors */
   --background: #ffffff;
   --foreground: #171717;
+
+  --surface: #ffffff;
+  --border: #e5e5e5;
+
+  /* Text */
+  --text-muted: #555555;
+
+  /* Accent / Primary */
+  --primary: #9c7627;
+
+  /* Fonts */
+  --font-body: "Rajdhani", sans-serif;
+  --font-heading: "Orbitron", sans-serif;
 }
+
+/* =========================
+   DARK MODE (CLASS-BASED)
+   ========================= */
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --surface: #111827;
+  --border: #1f2937;
+
+  --text-muted: #9ca3af;
+
+  /* Slightly brighter primary for contrast */
+  --primary: #b58b33;
+}
+
+/* =========================
+   TAILWIND THEME BRIDGE
+   ========================= */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* =========================
+   BASE STYLES
+   ========================= */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+.font-orbitron {
+  font-family: var(--font-heading);
+}
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+/* =========================
+   SEMANTIC UTILITIES
+   ========================= */
+
+@layer utilities {
+  .bg-surface {
+    background-color: var(--surface);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .border-default {
+    border-color: var(--border);
+  }
+
+  .text-primary {
+    color: var(--primary);
+  }
+
+  .bg-primary {
+    background-color: var(--primary);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* --- Grain (no external image needed) --- */
