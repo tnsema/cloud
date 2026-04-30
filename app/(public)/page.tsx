@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { learningLogs, projects, videos } from "./content";
+import { projects } from "@/data/projects";
+import { learningLogs, videos } from "./content";
 
 export default function Page() {
   const focus = [
@@ -141,8 +142,8 @@ export default function Page() {
               <h3 className="mt-2 font-orbitron text-lg font-bold text-white">
                 {latestProject.title}
               </h3>
-              <p className="mt-2 text-sm text-white/75">
-                {latestProject.description}
+                <p className="mt-2 text-sm text-white/75">
+                {latestProject.shortDescription}
               </p>
             </Link>
 

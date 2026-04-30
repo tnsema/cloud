@@ -107,4 +107,49 @@ h6 {
   }
 }
 
+@layer components {
+  .detail-section {
+    margin-top: 2rem;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    padding: 1.5rem;
+  }
+
+  .action-link-primary {
+    border-radius: 9999px;
+    background: var(--primary);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #ffffff;
+    transition: opacity 150ms ease;
+  }
+
+  .action-link-primary:hover {
+    opacity: 0.9;
+  }
+
+  .action-link-secondary {
+    border-radius: 9999px;
+    border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--font-heading);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    transition: background-color 150ms ease;
+  }
+
+  .action-link-secondary:hover {
+    background: color-mix(in srgb, var(--primary) 14%, transparent);
+  }
+}
+
 /* --- Grain (no external image needed) --- */

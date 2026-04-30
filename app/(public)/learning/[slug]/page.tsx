@@ -33,7 +33,7 @@ export default async function LearningLogPage({
         <p className="mt-3 text-foreground/70">{log.whyItMatters}</p>
       </section>
       <Section title="Mistakes and Challenges" items={log.challenges} />
-      <Section title="Next Steps" items={log.nextSteps} />
+      <Section title="What I Built/Tested" items={log.builtTested} />
 
       {relatedVideo ? (
         <section className="mt-8 rounded-lg border border-black/10 p-5 dark:border-white/10">

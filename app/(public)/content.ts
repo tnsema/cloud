@@ -7,7 +7,7 @@ export type LearningLog = {
   whatILearned: string[];
   whyItMatters: string;
   challenges: string[];
-  nextSteps: string[];
+  builtTested: string[];
   videoSlug?: string;
 };
 
@@ -39,71 +39,99 @@ export type Video = {
 
 export const learningLogs: LearningLog[] = [
   {
-    slug: "aws-iam-foundations",
-    title: "AWS IAM Foundations",
+    slug: "what-i-learned-about-s3",
+    title: "What I Learned About S3",
+    date: "2026-04-30",
+    category: "AWS",
+    summary:
+      "S3 is object storage for files, backups, static websites, logs, and cloud assets, but permissions and public access need careful handling.",
+    whatILearned: [
+      "S3 stores objects inside buckets instead of running like a normal file server.",
+      "Bucket policies, IAM policies, and public access settings all affect who can read or write objects.",
+      "Versioning, encryption, and lifecycle rules make S3 useful for safer long-term storage.",
+    ],
+    whyItMatters:
+      "S3 is used in many AWS projects, and one bad permission setting can expose private files or break an application.",
+    challenges: [
+      "I first treated S3 like a regular folder and forgot that object permissions are controlled separately.",
+      "I had to slow down and check the difference between blocking public access and allowing CloudFront access.",
+    ],
+    builtTested: [
+      "Created an S3 bucket and uploaded test files.",
+      "Tested private vs public object access.",
+      "Reviewed how a static website can use S3 with CloudFront.",
+    ],
+  },
+  {
+    slug: "ec2-vs-s3",
+    title: "EC2 vs S3",
     date: "2026-04-29",
     category: "AWS",
     summary:
-      "Practiced users, groups, roles, policies, and the difference between identity-based and resource-based permissions.",
+      "EC2 gives you virtual servers for running workloads, while S3 gives you object storage for storing files and assets.",
     whatILearned: [
-      "IAM permissions are easier to reason about when each policy has one clear purpose.",
-      "Roles are the cleaner path for temporary access between AWS services.",
-      "Least privilege needs testing, not guessing.",
+      "EC2 is compute: it runs operating systems, apps, services, and scripts.",
+      "S3 is storage: it stores objects and serves files when permissions allow it.",
+      "A common cloud app can use EC2 for the backend and S3 for static assets, backups, or logs.",
     ],
     whyItMatters:
-      "IAM is the front door of every AWS account, so strong permission design is a cloud engineering and security foundation.",
+      "Choosing the wrong service can make a solution harder to manage, more expensive, or less secure.",
     challenges: [
-      "Separating role trust policies from permission policies took repetition.",
-      "Policy examples were easy to copy, but harder to explain line by line.",
+      "I initially compared them like they were similar products, but they solve different problems.",
+      "I had to think in terms of compute, storage, networking, and security boundaries.",
     ],
-    nextSteps: [
-      "Build a small S3 access lab with a restricted IAM role.",
-      "Use IAM Access Analyzer to review permissions.",
+    builtTested: [
+      "Mapped a simple hosted app architecture using EC2 and S3 together.",
+      "Compared what happens when an HTML file is hosted from S3 versus served from a web server on EC2.",
+    ],
+  },
+  {
+    slug: "iam-basics",
+    title: "IAM Basics",
+    date: "2026-04-28",
+    category: "Cloud Security",
+    summary:
+      "IAM controls who can access AWS resources, what actions they can take, and under which conditions.",
+    whatILearned: [
+      "Users, groups, roles, and policies are the core IAM building blocks.",
+      "Roles are better than long-term access keys when AWS services need to talk to each other.",
+      "Least privilege means giving only the permissions needed for a task.",
+    ],
+    whyItMatters:
+      "IAM is one of the most important cloud security controls because permission mistakes can expose an entire AWS account.",
+    challenges: [
+      "Separating trust policies from permission policies took repetition.",
+      "Policy examples were easy to copy but harder to explain line by line.",
+    ],
+    builtTested: [
+      "Created an IAM policy for limited S3 access.",
+      "Reviewed how an IAM role can be attached to an AWS service.",
+      "Tested what happens when a permission is missing.",
     ],
     videoSlug: "iam-foundations",
   },
   {
-    slug: "linux-networking-basics",
-    title: "Linux Networking Basics",
-    date: "2026-04-28",
-    category: "Linux",
-    summary:
-      "Reviewed IP addresses, DNS lookup tools, open ports, and basic troubleshooting commands on Linux.",
-    whatILearned: [
-      "Commands like ip, ss, curl, dig, and traceroute answer different parts of the connectivity question.",
-      "DNS problems can look like application problems until you test name resolution directly.",
-    ],
-    whyItMatters:
-      "Cloud workloads still run on networks and operating systems, so debugging starts with fundamentals.",
-    challenges: [
-      "It was tempting to jump straight to the cloud console before checking the host.",
-      "Reading command output carefully mattered more than memorizing flags.",
-    ],
-    nextSteps: [
-      "Create a repeatable network troubleshooting checklist.",
-      "Practice with a private EC2 instance and security group rules.",
-    ],
-  },
-  {
-    slug: "security-groups-vs-nacls",
-    title: "Security Groups vs Network ACLs",
+    slug: "how-dns-works-with-hosted-apps",
+    title: "How DNS Works With Hosted Apps",
     date: "2026-04-27",
-    category: "Cloud Security",
+    category: "Networking",
     summary:
-      "Compared stateful security groups with stateless network ACLs and mapped where each control applies in a VPC.",
+      "DNS connects a domain name to the infrastructure hosting an app, such as a load balancer, CloudFront distribution, or server IP.",
     whatILearned: [
-      "Security groups protect elastic network interfaces and track return traffic.",
-      "Network ACLs apply at subnet level and need explicit inbound and outbound rules.",
+      "A records, CNAME records, and alias records point traffic to different kinds of targets.",
+      "Hosted apps often use DNS with HTTPS certificates, CDNs, and load balancers.",
+      "DNS changes can take time to propagate because records are cached using TTL values.",
     ],
     whyItMatters:
-      "Knowing where traffic is allowed or blocked helps prevent exposed services and shortens incident response.",
+      "If DNS is wrong, users cannot reach the app even when the server, bucket, or load balancer is working correctly.",
     challenges: [
-      "Remembering rule evaluation order required a diagram.",
-      "Stateless outbound rules were easy to miss during testing.",
+      "I confused where the domain is registered with where DNS records are managed.",
+      "I had to trace the full path from browser to DNS record to hosting target.",
     ],
-    nextSteps: [
-      "Build a VPC lab with public and private subnets.",
-      "Document packet flow from browser to EC2.",
+    builtTested: [
+      "Drew a request flow for a domain pointing to a hosted cloud app.",
+      "Compared DNS targets for EC2, CloudFront, and load balancers.",
+      "Checked how HTTPS certificates fit into the hosting flow.",
     ],
   },
 ];
@@ -197,8 +225,8 @@ export const videos: Video[] = [
     youtubeId: "dQw4w9WgXcQ",
     description:
       "A walkthrough of IAM users, groups, roles, policies, and why least privilege matters.",
-    relatedLabel: "AWS IAM Foundations",
-    relatedHref: "/learning/aws-iam-foundations",
+    relatedLabel: "IAM Basics",
+    relatedHref: "/learning/iam-basics",
   },
   {
     slug: "static-site-demo",
@@ -207,7 +235,7 @@ export const videos: Video[] = [
     description:
       "A project demo covering S3 hosting, CloudFront distribution, HTTPS, and DNS.",
     relatedLabel: "Static Website on S3 and CloudFront",
-    relatedHref: "/projects/static-website-on-s3-cloudfront",
+    relatedHref: "/projects/aws-s3-static-website",
   },
 ];
 
