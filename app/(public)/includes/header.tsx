@@ -25,6 +25,7 @@ const dropdowns = [
     title: "About Me",
     items: [
       { label: "Purpose", href: "/about" },
+      { label: "Companies", href: "/companies" },
       { label: "Home", href: "/" },
     ],
   },
