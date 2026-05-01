@@ -10,6 +10,7 @@ const dropdowns = [
     items: [
       { label: "Learning Logs", href: "/learning" },
       { label: "Roadmap", href: "/roadmap" },
+      { label: "Roles", href: "/roles" },
     ],
   },
   {
