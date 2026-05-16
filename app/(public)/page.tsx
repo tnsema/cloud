@@ -250,7 +250,7 @@ export default function Page() {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">
-            {["AWS", "Cloud Security", "IAM", "S3"].map((tag) => (
+            {["Software Development", "Linux", "Networking", "AWS", "Cloud Computing", "Cyber Security", "Cloud Security"].map((tag) => (
               <span key={tag} className="home-badge">
                 {tag}
               </span>
