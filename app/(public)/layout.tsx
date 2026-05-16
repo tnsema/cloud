@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
-const navTabs = [
+const sidebarLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Learning", href: "/learning" },
@@ -19,45 +19,95 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
   const year = useMemo(() => new Date().getFullYear(), []);
+  const close = () => setOpen(false);
 
   return (
     <>
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-black text-white shadow-lg">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between md:px-8 lg:px-12">
+      <nav className="sticky top-0 z-50 bg-black text-white shadow-lg">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-8 lg:px-12">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="text-[color:var(--primary)] hover:opacity-90"
+            aria-label="Open menu"
+          >
+            <MenuIcon />
+          </button>
+
           <Link
             href="/"
-            className="font-orbitron text-2xl font-bold tracking-wider text-white"
+            className="font-orbitron text-2xl font-bold tracking-wider"
           >
             THOBILE
           </Link>
+        </div>
+      </nav>
 
-          <div className="-mx-2 flex gap-1 overflow-x-auto px-2 pb-1 md:mx-0 md:overflow-visible md:px-0 md:pb-0">
-            {navTabs.map((tab) => {
+      <aside
+        className={[
+          "fixed left-0 top-0 z-50 h-full w-80 bg-black text-white shadow-2xl",
+          "transform transition-transform duration-300 ease-in-out",
+          open ? "translate-x-0" : "-translate-x-full",
+        ].join(" ")}
+      >
+        <div className="relative h-full overflow-y-auto p-6">
+          <button
+            type="button"
+            onClick={close}
+            className="absolute right-4 top-4 text-[color:var(--primary)] hover:opacity-90"
+            aria-label="Close menu"
+          >
+            <CloseIcon />
+          </button>
+
+          <div className="mb-8 mt-8 text-center">
+            <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[color:var(--primary)] to-[#b58b33] text-3xl font-bold text-black">
+              T
+            </div>
+            <h3 className="font-orbitron text-xl font-bold">Thobile</h3>
+            <p className="text-sm text-[color:var(--primary)]">
+              Cloud Engineer in Progress
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            {sidebarLinks.map((link) => {
               const isActive =
-                tab.href === "/"
+                link.href === "/"
                   ? pathname === "/"
-                  : pathname === tab.href || pathname.startsWith(`${tab.href}/`);
+                  : pathname === link.href || pathname.startsWith(`${link.href}/`);
 
               return (
                 <Link
-                  key={tab.href}
-                  href={tab.href}
+                  key={link.href}
+                  href={link.href}
+                  onClick={close}
                   aria-current={isActive ? "page" : undefined}
                   className={[
-                    "shrink-0 rounded px-3 py-2 font-orbitron text-[10px] font-bold uppercase tracking-[0.14em] transition",
+                    "block rounded-lg px-4 py-3 font-orbitron text-sm font-semibold uppercase tracking-[0.12em] transition-colors",
                     isActive
-                      ? "bg-[var(--primary)] text-black"
-                      : "text-white/70 hover:bg-white/10 hover:text-[var(--primary)]",
+                      ? "bg-[color:var(--primary)] text-black"
+                      : "bg-gray-900 text-white hover:bg-gray-800 hover:text-[color:var(--primary)]",
                   ].join(" ")}
                 >
-                  {tab.label}
+                  {link.label}
                 </Link>
               );
             })}
           </div>
         </div>
-      </nav>
+      </aside>
+
+      {open && (
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-black/50"
+          onClick={close}
+          aria-label="Close menu overlay"
+        />
+      )}
 
       <main>{children}</main>
 
@@ -71,5 +121,43 @@ export default function PublicLayout({
         </div>
       </footer>
     </>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M4 7h16M4 12h16M4 17h16"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="m6 6 12 12M18 6 6 18"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
   );
 }
