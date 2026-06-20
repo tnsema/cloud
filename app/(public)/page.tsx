@@ -177,7 +177,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#060606] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#F6F1E6] text-[#111111]">
       <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-0" />
 
       <section className="relative z-10 mx-auto grid min-h-[calc(100vh-64px)] w-full max-w-6xl items-center gap-12 px-6 py-12 md:grid-cols-[360px_1fr] md:px-8">
@@ -225,7 +225,7 @@ export default function Page() {
 
               <div className="hero-photo">
                 <Image
-                  src="/b&w.jpg"
+                  src="/profile.jpg"
                   alt="Thobile Sema"
                   width={240}
                   height={240}
@@ -240,11 +240,11 @@ export default function Page() {
         <div className="animate-home-rise max-w-2xl">
           <p className="home-eyebrow">Cloud Engineering Journal</p>
 
-          <h1 className="mt-4 font-orbitron text-4xl font-black leading-tight text-white sm:text-5xl">
-            Thobile <span className="text-[#f3d36a]">Sema</span>
+          <h1 className="mt-4 font-orbitron text-4xl font-black leading-tight text-[#111111] sm:text-5xl">
+            Thobile <span className="text-[color:var(--primary)]">Sema</span>
           </h1>
 
-          <p className="mt-5 max-w-xl text-base leading-8 text-white/65 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-8 text-black/65 sm:text-lg">
             I am learning cloud engineering and cloud security by building AWS
             projects, writing short learning notes, and documenting what I test.
           </p>
@@ -264,17 +264,23 @@ export default function Page() {
             <Link href="/projects" className="home-btn-secondary">
               Projects
             </Link>
+            <Link
+              href="/videos#cloud-engineering-journey-intro"
+              className="home-btn-secondary"
+            >
+              Watch Intro Video
+            </Link>
           </div>
 
           {latestProject && (
             <section className="home-project-card mt-9 p-6">
               <p className="home-project-label">Latest Project</p>
 
-              <h2 className="mt-3 font-orbitron text-lg font-bold leading-snug text-white">
+              <h2 className="mt-3 font-orbitron text-lg font-bold leading-snug text-[#111111]">
                 {latestProject.title}
               </h2>
 
-              <p className="mt-3 max-w-xl text-sm leading-7 text-white/60">
+              <p className="mt-3 max-w-xl text-sm leading-7 text-black/60">
                 {latestProject.shortDescription}
               </p>
 
@@ -285,7 +291,7 @@ export default function Page() {
 
               <Link
                 href={`/projects/${latestProject.slug}`}
-                className="mt-5 inline-flex items-center gap-2 font-orbitron text-[10px] font-bold uppercase tracking-[0.18em] text-[#f3d36a] transition hover:gap-3 hover:opacity-80"
+                className="mt-5 inline-flex items-center gap-2 font-orbitron text-[10px] font-bold uppercase tracking-[0.18em] text-[color:var(--primary)] transition hover:gap-3 hover:opacity-80"
               >
                 View Project
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -358,7 +364,7 @@ export default function Page() {
           width: 348px;
           height: 348px;
           margin: -174px 0 0 -174px;
-          border-color: rgba(255, 255, 255, 0.08);
+          border-color: rgba(0, 0, 0, 0.1);
           animation: homeSpin 22s linear infinite;
         }
 
@@ -388,21 +394,21 @@ export default function Page() {
           font-weight: 700;
           letter-spacing: 0.24em;
           text-transform: uppercase;
-          color: #f3d36a;
+          color: var(--primary);
         }
 
         .home-eyebrow::before {
           content: "";
           width: 24px;
           height: 1px;
-          background: #f3d36a;
+          background: var(--primary);
         }
 
         .home-badge,
         .home-meta {
-          border: 1px solid rgba(243, 211, 106, 0.25);
-          background: rgba(243, 211, 106, 0.06);
-          color: #f3d36a;
+          border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+          background: color-mix(in srgb, var(--primary) 10%, transparent);
+          color: var(--primary);
           font-family: var(--font-heading);
           font-size: 9px;
           font-weight: 700;
@@ -417,7 +423,7 @@ export default function Page() {
 
         .home-meta {
           border-radius: 3px;
-          color: rgba(255, 255, 255, 0.58);
+          color: rgba(0, 0, 0, 0.58);
           padding: 4px 10px;
         }
 
@@ -444,12 +450,12 @@ export default function Page() {
         .home-btn-primary {
           background: #f3d36a;
           color: #080808;
-          box-shadow: 0 16px 38px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 16px 38px rgba(0, 0, 0, 0.16);
         }
 
         .home-btn-secondary {
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          color: rgba(255, 255, 255, 0.88);
+          border: 1px solid rgba(0, 0, 0, 0.14);
+          color: rgba(0, 0, 0, 0.82);
         }
 
         .home-btn-primary:hover,
@@ -462,17 +468,17 @@ export default function Page() {
         }
 
         .home-btn-secondary:hover {
-          border-color: rgba(243, 211, 106, 0.45);
-          color: #f3d36a;
+          border-color: color-mix(in srgb, var(--primary) 45%, transparent);
+          color: var(--primary);
         }
 
         .home-project-card {
           position: relative;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.09);
+          border: 1px solid rgba(0, 0, 0, 0.1);
           border-radius: 8px;
-          background: rgba(255, 255, 255, 0.045);
-          box-shadow: 0 20px 70px rgba(0, 0, 0, 0.22);
+          background: rgba(255, 255, 255, 0.58);
+          box-shadow: 0 20px 70px rgba(0, 0, 0, 0.12);
         }
 
         .home-project-card::before {
@@ -482,7 +488,7 @@ export default function Page() {
           left: 0;
           right: 0;
           height: 1px;
-          background: linear-gradient(90deg, transparent, #f3d36a, transparent);
+          background: linear-gradient(90deg, transparent, var(--primary), transparent);
           opacity: 0.65;
         }
 
@@ -495,7 +501,7 @@ export default function Page() {
           font-weight: 800;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #f3d36a;
+          color: var(--primary);
         }
 
         .home-project-label::before {
@@ -503,7 +509,7 @@ export default function Page() {
           width: 6px;
           height: 6px;
           border-radius: 9999px;
-          background: #f3d36a;
+          background: var(--primary);
           animation: homePulse 2s ease-in-out infinite;
         }
 

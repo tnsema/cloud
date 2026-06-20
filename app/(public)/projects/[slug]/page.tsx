@@ -1,5 +1,6 @@
 import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
+import { defaultVideo } from "../../content";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -218,6 +219,27 @@ export default async function ProjectDetailPage({
             ))}
           </div>
         </section>
+      ) : videoEmbedSrc(defaultVideo) ? (
+        <section className="detail-section">
+          <h2 className="text-2xl font-semibold">Videos</h2>
+          <div className="mt-4 space-y-5">
+            <div>
+              <div className="aspect-video overflow-hidden rounded-md bg-black">
+                <iframe
+                  className="h-full w-full"
+                  src={videoEmbedSrc(defaultVideo)}
+                  title={defaultVideo.title}
+                  allow="encrypted-media; fullscreen"
+                  allowFullScreen
+                />
+              </div>
+              <h3 className="mt-3 font-semibold">{defaultVideo.title}</h3>
+              <p className="mt-2 text-foreground/70">
+                {defaultVideo.description}
+              </p>
+            </div>
+          </div>
+        </section>
       ) : null}
 
       {challenges.length > 0 ? (
@@ -389,6 +411,14 @@ function hasText(value: string | undefined) {
 
 function cleanStrings(items: string[]) {
   return items.filter((item) => hasText(item));
+}
+
+function videoEmbedSrc(video: { youtubeId?: string; embedUrl?: string }) {
+  if (video.youtubeId) {
+    return `https://www.youtube.com/embed/${video.youtubeId}`;
+  }
+
+  return video.embedUrl ?? "";
 }
 
 function hasObjectData(item: Record<string, unknown>) {

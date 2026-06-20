@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { learningLogs } from "./(public)/content";
+import { learningLogs } from "@/data/learning";
 import { projects } from "@/data/projects";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { projects } from "@/data/projects";
-import { learningLogs, videos } from "../(public)/content";
+import { learningLogs } from "@/data/learning";
+import { videos } from "../(public)/content";
 import { requireAdmin } from "../lib/auth";
 import { logoutAction } from "./actions";
 

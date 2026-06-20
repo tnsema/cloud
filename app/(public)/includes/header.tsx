@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -18,7 +19,7 @@ const dropdowns = [
     title: "Projects",
     items: [
       { label: "Cloud Projects", href: "/projects" },
-      { label: "YouTube Videos", href: "/videos" },
+      { label: "Videos", href: "/videos" },
     ],
   },
   {
@@ -81,8 +82,14 @@ export default function Header() {
           </button>
 
           <div className="mb-8 mt-8 text-center">
-            <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[color:var(--primary)] to-[#b58b33] text-3xl font-bold text-black">
-              T
+            <div className="mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full border-2 border-[color:var(--primary)]">
+              <Image
+                src="/profile.jpg"
+                alt="Thobile Sema"
+                width={96}
+                height={96}
+                className="h-full w-full object-cover"
+              />
             </div>
             <h3 className="font-orbitron text-xl font-bold">Thobile</h3>
             <p className="text-sm text-[color:var(--primary)]">

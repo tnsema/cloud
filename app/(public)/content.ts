@@ -31,7 +31,10 @@ export type Project = {
 export type Video = {
   slug: string;
   title: string;
-  youtubeId: string;
+  youtubeId?: string;
+  embedUrl?: string;
+  externalUrl?: string;
+  provider: "YouTube" | "HeyGen";
   description: string;
   relatedLabel: string;
   relatedHref: string;
@@ -220,9 +223,20 @@ export const projects: Project[] = [
 
 export const videos: Video[] = [
   {
+    slug: "cloud-engineering-journey-intro",
+    title: "Cloud Engineering Journey Intro",
+    embedUrl: "https://app.heygen.com/embeds/02c17bdc17bc4df3b11d25f3b1b4b778",
+    externalUrl: "https://app.heygen.com/videos/02c17bdc17bc4df3b11d25f3b1b4b778",
+    provider: "HeyGen",
+    description:
+      "A short intro video for my cloud engineering journey, portfolio, and learning path.",
+    relatedLabel: "Home",
+    relatedHref: "/",
+  },
+  {
     slug: "iam-foundations",
     title: "AWS IAM Foundations",
-    youtubeId: "dQw4w9WgXcQ",
+    provider: "YouTube",
     description:
       "A walkthrough of IAM users, groups, roles, policies, and why least privilege matters.",
     relatedLabel: "IAM Basics",
@@ -231,13 +245,15 @@ export const videos: Video[] = [
   {
     slug: "static-site-demo",
     title: "Static Website on S3 and CloudFront Demo",
-    youtubeId: "dQw4w9WgXcQ",
+    provider: "YouTube",
     description:
       "A project demo covering S3 hosting, CloudFront distribution, HTTPS, and DNS.",
     relatedLabel: "Static Website on S3 and CloudFront",
     relatedHref: "/projects/aws-s3-static-website",
   },
 ];
+
+export const defaultVideo = videos[0];
 
 export const roadmap = [
   {
